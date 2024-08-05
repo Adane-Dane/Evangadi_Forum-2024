@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "../../../Axios/Axios";
 import { FaRegEdit } from "react-icons/fa";
 import Modal from "react-modal";
@@ -9,9 +9,9 @@ function Profile() {
   const [op, seto] = useState(false);
   const { userid } = useParams(); // Use useParams directly in the component body
   const [UserProfile, setUserProfile] = useState({});
-  const [fname, setfname] = useState("");
-  const [lname, setlname] = useState("");
-  const [Email, setEmail] = useState("");
+  const [firstname, setfname] = useState("");
+  const [lastname, setlname] = useState("");
+  const [email, setEmail] = useState("");
 
   async function userData() {
     try {
@@ -31,27 +31,25 @@ function Profile() {
   }, [userid]); // Add userid as a dependency to the useEffect
   async function HandleUpdate(e) {
     e.preventDefault();
-    if (!fname || !lname || !Email) {
+    if (!firstname || !lastname || !email) {
       return alert("Provide All Data ");
     }
-
-    alert("SDFSDfsd");
     try {
-      const response = await axios.put(`/users/update/${userid}`, {
-        fname: fname,
-        lname: lname,
-        Email: Email,
+      await axios.put(`/users/update/${userid}`, {
+        firstname,
+        lastname,
+        email,
       });
-      console.log("first");
-      alert("Appdated");
-      console.log(response);
+      alert(" data Updated.");
+      userData();
+      seto(false);
     } catch (error) {
       console.log("Error:", error);
       alert(" data failed. Please try again.");
     }
   }
   return (
-    <div className="max-w-lg mx-auto my-10 bg-slate-200 rounded-lg shadow-md p-5 mt-36 bg">
+    <div className="max-w-lg mx-auto my-10 bg-slate-200 rounded-lg shadow-md p-5 mt-36">
       <img
         className="w-32 h-32 rounded-full mx-auto"
         src="https://picsum.photos/200"
@@ -87,7 +85,7 @@ function Profile() {
       </div>
 
       <Modal isOpen={op} className="modal">
-        <form onSubmit={HandleUpdate}>
+        <form action="submit" method="put" onSubmit={HandleUpdate}>
           <div>
             <label class="block text-2xl font-semibold text-black p-2">
               First Name
@@ -96,7 +94,7 @@ function Profile() {
             <input
               onChange={(e) => setfname(e.target.value)}
               type="text"
-              value={fname}
+              value={firstname}
               class="mt-1 p-3 w-full bg-slate-200 rounded-md border-gray-200 shadow-sm sm:text-lg"
             />
 
@@ -107,7 +105,7 @@ function Profile() {
             <input
               onChange={(e) => setlname(e.target.value)}
               type="text"
-              value={lname}
+              value={lastname}
               class="mt-1 p-3 w-full bg-slate-200 rounded-md border-gray-200 shadow-sm sm:text-lg"
             />
 
@@ -118,7 +116,7 @@ function Profile() {
             <input
               onChange={(e) => setEmail(e.target.value)}
               type="email"
-              value={Email}
+              value={email}
               class="my-3 p-3 w-full bg-slate-200 rounded-md border-gray-200 shadow-sm sm:text-lg"
             />
             <div>

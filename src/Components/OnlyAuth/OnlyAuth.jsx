@@ -2,8 +2,12 @@ import axios from "../../Axios/Axios";
 import { useEffect, useState } from "react";
 import RenderAll from "./RenderAll";
 import { Link, useNavigate, useNavigation } from "react-router-dom";
-import Header from "../Header/Header";
+import setting from "../../images/usersetting.svg";
+import note from "../../images/notes-icon.svg";
+import question from "../../images/question.svg";
+import search from "../../images/search.svg";
 import "./Only.css";
+import AuthNav from "./AuthNav/AuthNav";
 
 export default function OnlyAuth() {
   const navigate = useNavigate();
@@ -11,7 +15,6 @@ export default function OnlyAuth() {
 
   const [user1, setUser] = useState({});
   const [data, setData] = useState({});
-  const navigation = [{ name: user1.username, href: "#" }];
   async function checkUser() {
     try {
       const { data } = await axios.get("/users/check", {
@@ -36,41 +39,26 @@ export default function OnlyAuth() {
   useEffect(() => {
     checkUser();
     alldata();
-  }, [user1]);
-  return (
-    <div div className="bg">
-      <Header navigation={navigation} RightText={"sd"} />
-      <div className="my-20">
-        <RenderAll data={data} />
-        {/* <div className="grid grid-cols-2 gap-4 px-4 mt-8 sm:grid-cols-4 sm:px-8">
-          {display_data.map((item) => {
-            return (
-              <div
-                div
-                onClick={() => navigate(`${item.title.split(" ").join("")}`)}
-                className="text-center  items-center border rounded-sm overflow-hidden shadow style_Item"
-              >
-                <h1 className="text-3xl	 text-blue-600">{item.title} </h1>
-                <p>{item.subTitle}</p>
-                <img src={item.image} alt="" />
-              </div>
-            );
-          })}
-        </div> */}
+  }, []);
+  console.log(user1);
 
-        <div class="container relative z-40 mx-auto mt-12">
-          <div class="flex flex-wrap justify-center mx-auto lg:w-full md:w-5/6 xl:shadow-small-blue">
+  return (
+    <div div className="bg-white">
+      <AuthNav user={user1} />
+
+      <div className="my-5">
+        <RenderAll data={data} />
+
+        <div className="container relative z-40 mx-auto mt-12">
+          <div className="flex flex-wrap justify-center mx-auto lg:w-full md:w-5/6 xl:shadow-small-blue">
             <Link
               to={`/Profile/${user1.userid}`}
-              class="block w-1/2 py-10 text-center border lg:w-1/4"
+              className="block w-1/2 py-10 text-center border lg:w-1/4"
             >
               <div>
-                <img
-                  src="https://redpixelthemes.com/assets/images/icon-portfolio-green.svg"
-                  class="block mx-auto"
-                />
+                <img className="block mx-auto h-28" src={setting} alt="" />
 
-                <p class="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
+                <p className="pt-4  mx-auto text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-4">
                   Profile
                 </p>
               </div>
@@ -78,15 +66,12 @@ export default function OnlyAuth() {
 
             <Link
               to={"/ViewAllQuestions"}
-              class="block w-1/2 py-10 text-center border lg:w-1/4"
+              className="block w-1/2 py-10 text-center border lg:w-1/4"
             >
               <div>
-                <img
-                  src="https://redpixelthemes.com/assets/images/icon-blog-green.svg"
-                  class="block mx-auto"
-                />
+                <img src={note} className="block mx-auto h-28" />
 
-                <p class="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
+                <p className="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
                   View All Question
                 </p>
               </div>
@@ -94,41 +79,41 @@ export default function OnlyAuth() {
 
             <Link
               to={"/HaveaQuestion"}
-              class="block w-1/2 py-10 text-center border lg:w-1/4"
+              className="block w-1/2 py-10 text-center border lg:w-1/4"
             >
               <div>
-                <img
-                  src="https://redpixelthemes.com/assets/images/icon-ecommerce-green.svg"
-                  class="block mx-auto"
-                />
+                <img src={question} className="block mx-auto h-28" />
 
-                <p class="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
+                <p className="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
                   Have Question ?
                 </p>
               </div>
             </Link>
 
-            <a href="#" class="block w-1/2 py-10 text-center border lg:w-1/4">
+            <a
+              href="#"
+              className="block w-1/2 py-10 text-center border lg:w-1/4"
+            >
               <div>
-                <img
-                  src="https://redpixelthemes.com/assets/images/icon-startup-green.svg"
-                  class="block mx-auto"
-                />
+                <img src={search} className="block mx-auto h-28" />
 
-                <p class="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
+                <p className="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
                   Search Question
                 </p>
               </div>
             </a>
 
-            <a href="#" class="block w-1/2 py-10 text-center border lg:w-1/4">
+            <a
+              href="#"
+              className="block w-1/2 py-10 text-center border lg:w-1/4"
+            >
               <div>
                 <img
                   src="https://redpixelthemes.com/assets/images/icon-business-green.svg"
-                  class="block mx-auto"
+                  className="block mx-auto"
                 />
 
-                <p class="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
+                <p className="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
                   Ideas
                 </p>
               </div>
@@ -136,15 +121,15 @@ export default function OnlyAuth() {
 
             <Link
               to={"/"}
-              class="block w-1/2 py-10 text-center border lg:w-1/4"
+              className="block w-1/2 py-10 text-center border lg:w-1/4"
             >
               <div>
                 <img
                   src="https://redpixelthemes.com/assets/images/icon-lifestyle-green.svg"
-                  class="block mx-auto"
+                  className="block mx-auto"
                 />
 
-                <p class="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
+                <p className="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
                   Logout
                 </p>
               </div>

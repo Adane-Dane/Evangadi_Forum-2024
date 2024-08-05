@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../Axios/Axios";
+import Alert from "../Alert/Alert";
 function LogIn() {
   const navigate = useNavigate();
   const EmailDom = useRef();
@@ -21,9 +22,8 @@ function LogIn() {
         password: PasswordValue,
       });
 
-      alert("You are Loged In ");
       localStorage.setItem("token", data.token);
-      console.log(data);
+      <Alert />;
       navigate("/only"); // navigate to some path after successful registration
     } catch (error) {
       console.log("Error:", error);
