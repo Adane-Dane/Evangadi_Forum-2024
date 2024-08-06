@@ -37,7 +37,7 @@ function Header({ navigation, RightText }) {
           </div>
           <div className=" lg:flex lg:flex-1 lg:justify-end">
             <Link
-              to={"/Auth"}
+              to={"/Authentication"}
               className="text-sm font-semibold leading-6 text-gray-900 hover:underline duration-150"
             >
               {RightText}

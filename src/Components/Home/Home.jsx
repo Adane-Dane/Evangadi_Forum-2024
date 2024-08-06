@@ -8,6 +8,7 @@ import { easeInOut, easeOut, motion } from "framer-motion";
 import About from "./About/About";
 import { useEffect, useContext } from "react";
 import { AppSate } from "../../App";
+import Mission from "./Mission/Mission";
 
 export default function App() {
   const { user, setUser } = useContext(AppSate);
@@ -66,7 +67,7 @@ export default function App() {
             </p>
             <div className="mt-4 flex text-center ">
               <Link
-                to={"/Auth"}
+                to={"/Authentication"}
                 className="rounded-md bg-orange-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Join Community
@@ -75,8 +76,7 @@ export default function App() {
           </div>
         </section>
       </motion.div>
-
-      <About />
+      <About />\{" "}
     </>
   );
 }

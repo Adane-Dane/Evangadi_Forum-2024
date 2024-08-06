@@ -8,7 +8,6 @@ import question from "../../images/question.svg";
 import search from "../../images/search.svg";
 import "./Only.css";
 import AuthNav from "./AuthNav/AuthNav";
-
 export default function OnlyAuth() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
@@ -40,7 +39,6 @@ export default function OnlyAuth() {
     checkUser();
     alldata();
   }, []);
-  console.log(user1);
 
   return (
     <div div className="bg-white">
@@ -90,8 +88,8 @@ export default function OnlyAuth() {
               </div>
             </Link>
 
-            <a
-              href="#"
+            <Link
+              to={"/Search"}
               className="block w-1/2 py-10 text-center border lg:w-1/4"
             >
               <div>
@@ -101,7 +99,7 @@ export default function OnlyAuth() {
                   Search Question
                 </p>
               </div>
-            </a>
+            </Link>
 
             <a
               href="#"

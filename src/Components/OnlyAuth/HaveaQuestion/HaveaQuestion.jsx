@@ -1,16 +1,20 @@
-import Guidelines from "./Guidelines";
 import axios from "../../../Axios/Axios";
 import { AppSate } from "../../../App";
 import { createContext, useContext } from "react";
 import { useRef } from "react";
+import AuthNav from "../AuthNav/AuthNav";
+import Footer from "../../Footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 function HaveaQuestion() {
   const titleRef = useRef();
   const descriptionRef = useRef();
+  const navigate = useNavigate();
   const { user } = useContext(AppSate);
   console.log(user);
 
-  async function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault();
     const title = titleRef.current.value;
     const description = descriptionRef.current.value;
     const token = localStorage.getItem("token");
@@ -34,71 +38,95 @@ function HaveaQuestion() {
         }
       );
       titleRef.current.value = "";
+      description.current.value = "";
       alert("Question posted successfully");
+      navigate("/only");
     } catch (error) {
       console.error(error.response.data);
       alert("Error posting question");
     }
   }
   return (
-    <div className="mt-20 bg">
-      <h1 className="text-center">Ask Question</h1>
-      <div className="flex ">
-        <Guidelines />
-        <div>
-          <div class="heading text-center font-bold text-2xl m-5 text-gray-800 ">
-            Post Your Question
+    <>
+      <AuthNav user={user} />
+      <div className="max-w-screen-lg mx-auto p-4 my-7">
+        <div className="grid grid-cols-2 md:grid-cols-12 border">
+          <div className="bg-gray-900 md:col-span-4 px-3 text-white">
+            <h3 className="text-2xl sm:text-3xl leading-normal font-extrabold tracking-tight mt-7">
+              Steps to write
+              <span className="text-orange-500 text-center">
+                {" "}
+                a good question
+              </span>
+            </h3>
+            <div className="mt-14">
+              <p className="my-3">
+                <span className="text-orange-500">=</span>Summarize your problem
+                in one-line title.
+              </p>
+              <p className="my-3">
+                <span className="text-orange-500">=</span>Describe your problem
+                in more detail.
+              </p>
+              <p className="my-3">
+                <span className="text-orange-500">=</span>
+                Describe what you tried and you expect to happen.
+              </p>
+              <p className="my-3">
+                <span className="text-orange-500">=</span>
+                Review your question and post it to the site.
+              </p>
+            </div>
           </div>
-
-          <div class="editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
-            <input
-              class="title bg-gray-100 border border-gray-800 p-2 mb-4 outline-none"
-              spellcheck="false"
-              ref={titleRef}
-              placeholder="Question Title"
-              type="text"
-            />
-            <textarea
-              class="description bg-gray-100 sec p-3 h-60 border border-gray-800 outline-none"
-              spellcheck="false"
-              ref={descriptionRef}
-              placeholder="Question Describe everything about this post here"
-            ></textarea>
-
-            <div class="icons flex text-gray-500 m-2">
-              <svg
-                class="mr-2 cursor-pointer hover:text-gray-700 border rounded-full p-1 h-7"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+          <form
+            method="post"
+            onSubmit={handleSubmit}
+            className="md:col-span-8 p-10"
+          >
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3">
+                <label
+                  className="block  tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  for="grid-password"
+                >
+                  Title
+                </label>
+                <input
+                  className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  ref={titleRef}
+                  type="text"
                 />
-              </svg>
-              <div class="count ml-auto text-gray-400 text-xs font-semibold">
-                0/300
               </div>
             </div>
-            <div class="buttons flex">
-              <div class="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">
-                Cancel
+
+            <div className="flex flex-wrap -mx-3 mb-6">
+              <div className="w-full px-3">
+                <label
+                  className="block  tracking-wide text-gray-700 text-xs font-bold mb-2"
+                  for="grid-password"
+                >
+                  Your Question
+                </label>
+                <textarea
+                  ref={descriptionRef}
+                  rows="10"
+                  className=" block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                ></textarea>
               </div>
-              <div
-                onClick={handleSubmit}
-                class="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500"
-              >
-                Post
+              <div className="flex justify-between w-full px-3">
+                <button
+                  className="shadow bg-indigo-600 hover:bg-indigo-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-6 rounded"
+                  type="submit"
+                >
+                  Post Question
+                </button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

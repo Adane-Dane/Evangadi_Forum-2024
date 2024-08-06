@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "../../../Axios/Axios";
-import SingleQuestion from "../SingleQuestion/SingleQuestion";
 import { Link } from "react-router-dom";
 import ReanderAllQuestion from "./ReanderAllQuestion";
+import AuthNav from "../AuthNav/AuthNav";
+import { AppSate } from "../../../App";
+import Footer from "../../Footer/Footer";
 
 function ViewAllQuestions() {
+  const { user } = useContext(AppSate);
   const token = localStorage.getItem("token");
   const [questions, setQuestions] = useState([]); // Renamed for consistency
-  const [showAnswer, setShowAnswer] = useState(false);
   const [questionid, seQuestionId] = useState({});
   async function fetchAllQuestions() {
     try {
@@ -26,15 +28,18 @@ function ViewAllQuestions() {
   useEffect(() => {
     fetchAllQuestions();
   }, [questionid]);
-  console.log(questions);
   return (
-    <div className="h-full my-12  ">
-      <div className="mx-auto min-w-fit">
-        {questions.map((element) => (
-          <ReanderAllQuestion element={element} />
-        ))}
+    <>
+      <AuthNav user={user} />
+      <div className="h-full my-12  ">
+        <div className="mx-auto min-w-fit">
+          {questions.map((element) => (
+            <ReanderAllQuestion element={element} />
+          ))}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import WhatWeOffer from "../WhatWeOffer/WhatWeOffer";
+import Mission from "../Mission/Mission";
 
 function About() {
   return (
@@ -24,6 +25,7 @@ function About() {
           </div>
         </div>
       </div>
+      <Mission />
       <WhatWeOffer />
     </>
   );

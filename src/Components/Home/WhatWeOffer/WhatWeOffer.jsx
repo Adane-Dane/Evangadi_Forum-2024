@@ -1,6 +1,9 @@
 import React from "react";
+import Aso from "aos";
 
 function WhatWeOffer() {
+  Aso.init();
+
   return (
     <div>
       <div class="bg-gray-100 min-h-screen py-20">
@@ -10,7 +13,12 @@ function WhatWeOffer() {
           </h1>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white rounded-lg shadow-lg p-8">
+            <div
+              class="bg-white rounded-lg shadow-lg p-8"
+              data-aos="fade-right"
+              data-aos-offset="300"
+              data-aos-easing="ease-in-sine"
+            >
               <h2 class="text-xl font-bold text-orange-600 mb-4">
                 Discussion Boards
               </h2>
@@ -25,7 +33,10 @@ function WhatWeOffer() {
                 that interest you.
               </p>
             </div>
-            <div class="bg-white rounded-lg shadow-lg p-8">
+            <div
+              class="bg-white rounded-lg shadow-lg p-8"
+              data-aos="zoom-in-down"
+            >
               <h2 class="text-xl font-bold text-orange-600 mb-4">
                 Knowledge Sharing
               </h2>
@@ -42,7 +53,12 @@ function WhatWeOffer() {
                 insights can help others learn and grow.
               </p>
             </div>
-            <div class="bg-white rounded-lg shadow-lg p-8">
+            <div
+              class="bg-white rounded-lg shadow-lg p-8"
+              data-aos="fade-left"
+              data-aos-offset="300"
+              data-aos-easing="ease-in-sine"
+            >
               <h2 class="text-xl font-bold text-orange-600 mb-4">
                 Networking Opportunities
               </h2>

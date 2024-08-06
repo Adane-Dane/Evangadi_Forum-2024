@@ -1,61 +1,55 @@
 import React from "react";
+import classes from "./Footer.module.css";
+import Evangadifoot from "../../images/evangadi-logo-footer-f73bca57.png";
+import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import { Link } from "react-router-dom";
 
-function Footer() {
+function Footer(props) {
   return (
-    <footer class="text-white px-8 py-6 bg-gray-800">
-      <div class="container m-auto grid grid-cols-1 md:grid-cols-3 gap-9 p-8">
-        <div class="mb-8 md:mb-0 ">
-          <h3 class="text-lg font-bold mb-4">Example</h3>
+    <div className={classes.mainFooter}>
+      <div className={classes.footerContainer}>
+        <div className={classes.mediaSection}>
+          <div className={classes.footerLogo}>
+            <img src={Evangadifoot} alt="" />
+          </div>
+          <div className={classes.socialIcons}>
+            <ul>
+              <li>
+                <FacebookOutlinedIcon sx={{ color: "white", fontSize: 35 }} />
+              </li>
+              <li>
+                <InstagramIcon sx={{ color: "white", fontSize: 35 }} />
+              </li>
+              <li>
+                <YouTubeIcon sx={{ color: "white", fontSize: 35 }} />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className={classes.usefulLinks}>
+          <h3>Useful Link</h3>
           <ul>
             <li>
-              <a href="#" class="hover:text-yellow-400">
-                About Us
-              </a>
+              <Link>How it works</Link>
             </li>
             <li>
-              <a href="#" class="hover:text-yellow-400">
-                Delivery Policy
-              </a>
+              <Link>Terms of Service</Link>
             </li>
             <li>
-              <a href="#" class="hover:text-yellow-400">
-                Contact Us
-              </a>
+              <Link>Privacy policy</Link>
             </li>
           </ul>
         </div>
-        <div class="mb-8 md:mb-0">
-          <h3 class="text-lg font-bold mb-4">Useful Link</h3>
-          <ul>
-            <li>
-              <a href="#" class="hover:text-yellow-400">
-                Terms of Service
-              </a>
-            </li>
-            <li>
-              <a href="#" class="hover:text-yellow-400">
-                Privacy policy
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-lg font-bold mb-4">Contact Info</h3>
-          <ul class="mb-4">
-            <li>
-              <a href="tel:+1-202-386-2702" class="hover:text-yellow-400 py-9">
-                support@evangadi.com
-              </a>
-            </li>
-            <li>
-              <a href="" class="hover:text-yellow-400 mt-14">
-                +1-202-386-2702{" "}
-              </a>
-            </li>
-          </ul>
+        <div className={classes.contactInfo}>
+          <h3>Contact Info</h3>
+          <p>Evangadi Networks</p>
+          <p>Support@evangadi.com</p>
+          <p>+1-202-386-2702</p>
         </div>
       </div>
-    </footer>
+    </div>
   );
 }
 

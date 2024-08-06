@@ -4,7 +4,6 @@ import Avatar from "@mui/material/Avatar";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { AppSate } from "../../../App";
 import { deepOrange, deepPurple } from "@mui/material/colors";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function SingleQuestion({ element }) {
@@ -73,7 +72,6 @@ function SingleQuestion({ element }) {
           data: { questionid },
         }
       );
-      toast("Wow so easy!");
       answerdata();
     } catch (error) {
       console.error(
