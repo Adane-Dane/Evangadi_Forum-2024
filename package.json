@@ -21,11 +21,13 @@
     "@nextui-org/avatar": "^2.0.32",
     "@popperjs/core": "^2.11.8",
     "@react-icons/all-files": "^4.1.0",
+    "@tippyjs/react": "^4.2.6",
     "aos": "^2.3.4",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "clsx": "^2.1.1",
     "debounce": "^2.1.0",
-    "framer-motion": "^11.3.19",
+    "framer-motion": "^11.3.22",
     "react": "^18.3.1",
     "react-animate-on-scroll": "^2.1.9",
     "react-bootstrap": "^2.10.4",
@@ -36,7 +38,8 @@
     "react-router-dom": "^6.25.1",
     "react-toastify": "^10.0.5",
     "react-type-animation": "^3.2.0",
-    "styled-components": "^6.1.12"
+    "styled-components": "^6.1.12",
+    "tailwind-merge": "^2.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

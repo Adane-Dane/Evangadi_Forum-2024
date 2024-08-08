@@ -34,7 +34,10 @@ function ViewAllQuestions() {
       <div className="h-full my-12  ">
         <div className="mx-auto min-w-fit">
           {questions.map((element) => (
-            <ReanderAllQuestion element={element} />
+            <ReanderAllQuestion
+              element={element}
+              fetchAllQuestions={fetchAllQuestions}
+            />
           ))}
         </div>
       </div>

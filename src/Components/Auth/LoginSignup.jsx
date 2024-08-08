@@ -1,17 +1,16 @@
-import React from "react";
-import styles from "./LoginSignup.module.css";
-import { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useState } from "react";
 import Header from "../Header/Header";
 import axios from "../../Axios/Axios";
-import Aso from "aos";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./LoginSignup.module.css";
 
 function LoginSignup() {
   const navigate = useNavigate();
   const emailRef = useRef();
-  const passwordRef = useRef();
+  const passwordLoginRef = useRef();
   const usernameRef = useRef();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -19,7 +18,8 @@ function LoginSignup() {
   const passwordSignupRef = useRef();
 
   const [isLoginVisible, setIsLoginVisible] = useState(true);
-  const [password, setPassword] = useState("");
+  const [passwordLogin, setPasswordLogin] = useState("");
+  const [passwordSignup, setPasswordSignup] = useState("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [loginErrorMessage, setLoginErrorMessage] = useState("");
   const [signupErrorMessage, setSignupErrorMessage] = useState("");
@@ -43,7 +43,7 @@ function LoginSignup() {
   async function handleLoginSubmit(e) {
     e.preventDefault();
     const emailValue = emailRef.current.value;
-    const passwordValue = passwordRef.current.value;
+    const passwordValue = passwordLoginRef.current.value;
     if (!emailValue || !passwordValue) {
       setLoginErrorMessage("Please Enter Email and Password");
       return;
@@ -81,8 +81,7 @@ function LoginSignup() {
       !emailSignupValue ||
       !passwordSignupValue
     ) {
-      setSignupErrorVisible(false);
-      setSignupErrorMessage("ALL fields are required");
+      setSignupErrorMessage("All fields are required");
       return;
     }
     try {
@@ -93,13 +92,13 @@ function LoginSignup() {
         email: emailSignupValue,
         password: passwordSignupValue,
       });
-      alert("The user has successfully registered");
+      toast.success("The user has successfully registered");
       navigate("/Authentication");
       usernameRef.current.value = "";
       firstNameRef.current.value = "";
       lastNameRef.current.value = "";
       emailSignupRef.current.value = "";
-      passwordSignupRef.current.value = null;
+      passwordSignupRef.current.value = "";
       setIsLoginVisible(true);
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -107,14 +106,11 @@ function LoginSignup() {
       } else {
         alert("Something went wrong. Please try again later.");
       }
-    } finally {
-      if (signupErrorVisible) {
-        setIsLoginVisible(true);
-      }
     }
   }
+
   const navigation = [{ name: "", href: "#" }];
-  Aso.init();
+
   return (
     <>
       <Header navigation={navigation} RightText={"Home"} />
@@ -152,9 +148,9 @@ function LoginSignup() {
                   <div className={styles.password}>
                     <input
                       type={isPasswordVisible ? "text" : "password"}
-                      ref={passwordRef}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      ref={passwordLoginRef}
+                      value={passwordLogin}
+                      onChange={(e) => setPasswordLogin(e.target.value)}
                       placeholder="Password"
                     />
                     <span
@@ -228,8 +224,8 @@ function LoginSignup() {
                     <input
                       type={isPasswordVisible ? "text" : "password"}
                       ref={passwordSignupRef}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
+                      value={passwordSignup}
+                      onChange={(e) => setPasswordSignup(e.target.value)}
                       placeholder="Password"
                     />
                     <span

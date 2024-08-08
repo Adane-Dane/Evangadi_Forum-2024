@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import SingleQuestion from "../SingleQuestion/SingleQuestion";
-
-function ReanderAllQuestion({ element }) {
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import { deepOrange, deepPurple } from "@mui/material/colors";
+function ReanderAllQuestion({ element, fetchAllQuestions }) {
   const [showcomment, setcomment] = useState(false);
   const [click, setclick] = useState([]);
-
   return (
     <>
       <div
@@ -12,21 +13,28 @@ function ReanderAllQuestion({ element }) {
         tabindex="0"
         className="w-3/6 mx-auto  shadow-2xl p-5"
       >
-        <div className="flex items-center border-b border-gray-200 p-6 my-5">
-          <div className="w-12 h-12 bg-gray-300 rounded-full flex flex-shrink-0"></div>
+        <div className="flex items-center border-b border-gray-200 p-6 my-5 ">
+          <div className="">
+            <Stack direction="row" spacing={2}>
+              <Avatar sx={{ bgcolor: deepPurple[500] }}>
+                {element.username.slice(0, 1)}
+              </Avatar>
+            </Stack>
+            <p
+              tabindex="0"
+              className="focus:outline-none text-sm leading-normal  text-gray-500"
+            >
+              {element.username}
+            </p>
+          </div>
+
           <div className="flex items-start justify-between w-full">
             <div className="pl-3 w-full">
               <p
                 tabindex="0"
-                className="focus:outline-none text-xl font-medium leading-5 text-gray-800"
+                className="focus:outline-none text-xl ml-6 font-medium leading-5 text-gray-800"
               >
                 {element.title}
-              </p>
-              <p
-                tabindex="0"
-                className="focus:outline-none text-sm leading-normal pt-2 text-gray-500"
-              >
-                {element.username}
               </p>
             </div>
           </div>
@@ -56,7 +64,12 @@ function ReanderAllQuestion({ element }) {
             </div>
           </div>
         </div>
-        {showcomment && <SingleQuestion element={click} />}
+        {showcomment && (
+          <SingleQuestion
+            element={click}
+            fetchAllQuestions={fetchAllQuestions}
+          />
+        )}
       </div>
     </>
   );

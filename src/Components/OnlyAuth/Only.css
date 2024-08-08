@@ -14,7 +14,6 @@
 }
 a:hover {
   border-radius: 3px;
-  background-color: rgba(255, 132, 0, 0.74);
   transition-duration: 0.8s;
   transition-delay: 0.1s;
 }

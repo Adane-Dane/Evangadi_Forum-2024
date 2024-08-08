@@ -8,8 +8,6 @@ import { easeInOut, easeOut, motion } from "framer-motion";
 import About from "./About/About";
 import { useEffect, useContext } from "react";
 import { AppSate } from "../../App";
-import Mission from "./Mission/Mission";
-
 export default function App() {
   const { user, setUser } = useContext(AppSate);
   const navigate = useNavigate();

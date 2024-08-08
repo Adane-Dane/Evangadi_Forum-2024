@@ -10,6 +10,9 @@ import SingleQuestion from "./Components/OnlyAuth/SingleQuestion/SingleQuestion"
 import Profile from "./Components/OnlyAuth/Profile/Profile";
 import LoginSignup from "./Components/Auth/LoginSignup";
 import Search from "./Components/OnlyAuth/Search/Search";
+import YourQuestions from "./Components/OnlyAuth/YourQuestions/YourQuestions";
+import PageNotFound from "./Components/PageNotFound/PageNotFound";
+import { ToastContainer } from "react-toastify";
 export const AppSate = createContext();
 function App() {
   const token = localStorage.getItem("token");
@@ -24,21 +27,19 @@ function App() {
         },
       });
       setUser(data);
-      navigate("/only");
     } catch (error) {
       navigate("/");
     }
   }
   useEffect(() => {
     checkUser();
-  }, []);
+  }, [token]);
 
   return (
-    <AppSate.Provider value={{ user, setUser }}>
+    <AppSate.Provider value={{ user, setUser, checkUser }}>
       <Routes>
         <Route path="/" element={<Landing />}>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/Auth" element={<Auth />} /> */}
           <Route path="/Authentication" element={<LoginSignup />} />
           <Route path="/only" element={<OnlyAuth />} />
         </Route>
@@ -46,7 +47,10 @@ function App() {
         <Route path="/ViewAllQuestions" element={<ViewAllQuestions />} />
         <Route path="/Profile/:userid" element={<Profile />} />
         <Route path="/Search" element={<Search />} />
+        <Route path="/YourQuestions" element={<YourQuestions />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
+      <ToastContainer theme="dark" />
     </AppSate.Provider>
   );
 }

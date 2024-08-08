@@ -6,12 +6,13 @@ import { AppSate } from "../../../App";
 import { deepOrange, deepPurple } from "@mui/material/colors";
 import "react-toastify/dist/ReactToastify.css";
 
-function SingleQuestion({ element }) {
+function SingleQuestion({ element, fetchAllQuestions }) {
   const { user } = useContext(AppSate);
   const Answer = useRef();
   const [showAnswer, setShowAnswer] = useState([]);
   const [error, seterror] = useState(false);
   const token = localStorage.getItem("token");
+
   async function handleSubmit() {
     const title = Answer.current.value;
 
@@ -33,6 +34,8 @@ function SingleQuestion({ element }) {
         }
       );
       alert("Question posted successfully");
+      fetchAllQuestions();
+      Answer.current.value = "";
       answerdata();
     } catch (error) {
       console.error(error.response.data);
@@ -73,6 +76,7 @@ function SingleQuestion({ element }) {
         }
       );
       answerdata();
+      fetchAllQuestions();
     } catch (error) {
       console.error(
         "Error:",
@@ -88,12 +92,12 @@ function SingleQuestion({ element }) {
 
   return (
     <>
-      <div className="overflow-y-auto h-auto mt-3 ">
+      <div className="overflow-y-auto h-auto mt-3  transition duration-300 delay-300">
         {showAnswer.map((element) => {
           return (
             <div className="relative border-l-violet-400  border-2 flex justify-between ">
               <div className="md:flex items-center md:space-x-4 mb-1">
-                <Avatar sx={{ bgcolor: deepPurple[500] }}>OP</Avatar>
+                <Avatar>{element.username.slice(0, 1)}</Avatar>
                 <div className="text-slate-500 ml-14 p-2">
                   <p className="text-slate-900 font-bold">{element.username}</p>
                   {element.answer}
@@ -125,7 +129,7 @@ function SingleQuestion({ element }) {
           <div className="py-3">
             <button
               onClick={handleSubmit}
-              className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
+              className="hover:bg-green-700 bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:text-white"
             >
               Post Answer
             </button>

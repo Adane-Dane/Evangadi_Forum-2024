@@ -1,19 +1,23 @@
 import axios from "../../Axios/Axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RenderAll from "./RenderAll";
 import { Link, useNavigate, useNavigation } from "react-router-dom";
 import setting from "../../images/usersetting.svg";
 import note from "../../images/notes-icon.svg";
 import question from "../../images/question.svg";
 import search from "../../images/search.svg";
+import YourQuestion from "../../images/Yourquestion.svg";
+import logout from "../../images/logout.svg";
 import "./Only.css";
 import AuthNav from "./AuthNav/AuthNav";
+import Tippy from "@tippyjs/react";
+
 export default function OnlyAuth() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-
   const [user1, setUser] = useState({});
   const [data, setData] = useState({});
+
   async function checkUser() {
     try {
       const { data } = await axios.get("/users/check", {
@@ -39,11 +43,9 @@ export default function OnlyAuth() {
     checkUser();
     alldata();
   }, []);
-
   return (
-    <div div className="bg-white">
+    <div div className="bg-white bg">
       <AuthNav user={user1} />
-
       <div className="my-5">
         <RenderAll data={data} />
 
@@ -101,31 +103,25 @@ export default function OnlyAuth() {
               </div>
             </Link>
 
-            <a
-              href="#"
+            <Link
+              to={"/YourQuestions"}
               className="block w-1/2 py-10 text-center border lg:w-1/4"
             >
               <div>
-                <img
-                  src="https://redpixelthemes.com/assets/images/icon-business-green.svg"
-                  className="block mx-auto"
-                />
+                <img src={YourQuestion} className="block mx-auto h-28" />
 
                 <p className="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
-                  Ideas
+                  Your Questions
                 </p>
               </div>
-            </a>
+            </Link>
 
             <Link
               to={"/"}
               className="block w-1/2 py-10 text-center border lg:w-1/4"
             >
               <div>
-                <img
-                  src="https://redpixelthemes.com/assets/images/icon-lifestyle-green.svg"
-                  className="block mx-auto"
-                />
+                <img src={logout} className="block mx-auto  h-28" />
 
                 <p className="pt-4 text-sm font-medium capitalize font-body text-green-900 lg:text-lg md:text-base md:pt-6">
                   Logout
